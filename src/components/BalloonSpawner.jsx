@@ -5,6 +5,7 @@ import balloonAnimation from '../assets/animations/balloon.json';
 const Balloon = ({ position, onComplete }) => {
   return (
     <div
+      className="animate-float"
       style={{
         position: 'fixed',
         left: position.x,
@@ -47,7 +48,7 @@ const BalloonSpawner = ({ active }) => {
           id: nextIdRef.current++,
           position: {
             x: Math.random() * (window.innerWidth - size),
-            y: Math.random() * (window.innerHeight - size)
+            y: Math.random() * (window.innerHeight - size),
           }
         }
       ]);

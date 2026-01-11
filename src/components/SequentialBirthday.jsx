@@ -8,23 +8,12 @@ const SequentialBirthday = () => {
   const [lightsOff, setLightsOff] = useState(false);
   const [isDecorated, setIsDecorated] = useState(false);
   const [balloonsActive, setBalloonsActive] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
   const audioRef = useRef(null);
-
-  useEffect(() => {
-    if (lightsOff) {
-      document.body.style.backgroundColor = '#23272F';
-      document.body.style.color = 'white';
-    }
-
-    return () => {
-      document.body.style.backgroundColor = '';
-      document.body.style.color = '';
-    };
-  }, [lightsOff]);
-
 
   const handleNextStep = () => {
     setStep(prevStep => prevStep + 1);
+    setIsExiting(false);
   };
 
   const handleLightsOff = () => {
@@ -60,30 +49,37 @@ const SequentialBirthday = () => {
     { text: "A message?", action: handleNextStep }
   ];
 
+  const handleClick = () => {
+    setIsExiting(true);
+    setTimeout(() => {
+      steps[step].action();
+    }, 300);
+  };
+
+  const buttonClasses = (step) => {
+    if (step === 0) {
+      return "bg-white text-black border-black";
+    }
+    return "bg-transparent text-white border-white";
+  };
+
   return (
     <>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        textAlign: 'center',
-        flexDirection: 'column',
-        transition: 'background-color 1s, color 1s',
-        position: 'relative',
-        overflow: 'hidden'
-      }}>
+      <div className={`flex justify-center items-center h-screen text-center flex-col transition-colors duration-1000 relative overflow-hidden ${lightsOff ? 'bg-[#23272F] text-white' : 'bg-white text-[#23272F]'}`}>
         <audio ref={audioRef} src={music} loop />
         <StarField isDecorated={isDecorated} />
         <BalloonSpawner active={balloonsActive} />
         {step < steps.length ? (
-          <button onClick={steps[step].action} style={{padding: '10px 20px', fontSize: '16px', cursor: 'pointer', position: 'relative', zIndex: 10}}>
+          <button 
+            onClick={handleClick} 
+            className={`p-3 m-3 w-40 rounded-2xl text-center transition-transform transform hover:scale-110 relative z-10 border-2 ${buttonClasses(step)} ${isExiting ? 'animate-zoom-in-fade-out' : ''}`}
+          >
             {steps[step].text}
           </button>
         ) : (
-          <div style={{position: 'relative', zIndex: 10}}>
-            <h2>Happy Birthday!</h2>
-            <p>Hope you have a great day!</p>
+          <div className="relative z-10 animate-fade-in">
+            <h2 className="text-5xl font-bold mb-4">Happy Birthday!</h2>
+            <p className="text-2xl">Hope you have a great day!</p>
           </div>
         )}
       </div>
