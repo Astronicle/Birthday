@@ -1,0 +1,33 @@
+.cake-instance {
+    position: fixed;
+    pointer-events: none;
+    will-change: transform;
+    z-index: 5; /* Below UI, above background */
+  }
+  
+  .move-left-to-right {
+    animation: moveLeftToRight 5s linear forwards;
+  }
+  
+  .move-right-to-left {
+    animation: moveRightToLeft 5s linear forwards;
+  }
+  
+  @keyframes moveLeftToRight {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100vw);
+    }
+  }
+  
+  @keyframes moveRightToLeft {
+    from {
+      transform: translateX(100%) scaleX(-1);
+    }
+    to {
+      transform: translateX(-100vw) scaleX(-1);
+    }
+  }
+  
