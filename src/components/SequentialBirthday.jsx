@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import music from '../assets/Paradise-Paradise.mp3';
 import StarField from './StarField';
 import BalloonSpawner from './BalloonSpawner';
@@ -10,12 +11,10 @@ const SequentialBirthday = () => {
   const [isDecorated, setIsDecorated] = useState(false);
   const [balloonsActive, setBalloonsActive] = useState(false);
   const [cakeRunActive, setCakeRunActive] = useState(false);
-  const [isExiting, setIsExiting] = useState(false);
   const audioRef = useRef(null);
 
   const handleNextStep = () => {
     setStep(prevStep => prevStep + 1);
-    setIsExiting(false);
   };
 
   const handleLightsOff = () => {
@@ -57,10 +56,7 @@ const SequentialBirthday = () => {
   ];
 
   const handleClick = () => {
-    setIsExiting(true);
-    setTimeout(() => {
-      steps[step].action();
-    }, 300);
+    steps[step].action();
   };
 
   const buttonClasses = (step) => {
@@ -72,6 +68,17 @@ const SequentialBirthday = () => {
 
   const showButton = step < steps.length;
 
+  const buttonVariants = {
+    initial: { opacity: 0, scale: 0.5 },
+    animate: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+    exit: { opacity: 0, scale: 1.5, transition: { duration: 0.3 } },
+    hover: { scale: 1.1 }
+  };
+
+  const messageVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } }
+  };
 
   return (
     <>
@@ -80,21 +87,34 @@ const SequentialBirthday = () => {
         <StarField isDecorated={isDecorated} />
         <BalloonSpawner active={balloonsActive} />
         {cakeRunActive && <CakeRun />}
-        {showButton ? (
-          <button
-            onClick={handleClick}
-            className={`p-3 m-3 w-40 rounded-2xl text-center transition-transform transform hover:scale-110 relative z-10 border-2 ${buttonClasses(step)} ${isExiting ? 'animate-zoom-in-fade-out' : ''}`}
-          >
-            {steps[step].text}
-          </button>
-        ) : (
-          step >= steps.length && (
-            <div className="relative z-10 animate-fade-in">
-              <h2 className="text-5xl font-bold mb-4">Happy Birthday!</h2>
-              <p className="text-2xl">Hope you have a great day!</p>
-            </div>
-          )
-        )}
+        <AnimatePresence mode="wait">
+          {showButton ? (
+            <motion.button
+              key={step}
+              onClick={handleClick}
+              className={`p-3 m-3 w-40 rounded-2xl text-center relative z-10 border-2 ${buttonClasses(step)}`}
+              variants={buttonVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              whileHover="hover"
+            >
+              {steps[step].text}
+            </motion.button>
+          ) : (
+            step >= steps.length && (
+              <motion.div
+                className="relative z-10"
+                variants={messageVariants}
+                initial="initial"
+                animate="animate"
+              >
+                <h2 className="text-5xl font-bold mb-4">Happy Birthday!</h2>
+                <p className="text-2xl">Hope you have a great day!</p>
+              </motion.div>
+            )
+          )}
+        </AnimatePresence>
       </div>
     </>
   );
