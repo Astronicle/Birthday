@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 const BirthdayMessage = () => {
   const messageVariants = {
     initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } }
+    animate: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
+    exit: { opacity: 0, y: 20, transition: { duration: 1, ease: "easeOut" } }
   };
 
   return (
@@ -13,6 +14,7 @@ const BirthdayMessage = () => {
       variants={messageVariants}
       initial="initial"
       animate="animate"
+      exit="exit"
     >
       <h2 className="text-5xl font-bold mb-4">Happy Birthday!</h2>
       <p className="text-2xl">Hope you have a great day!</p>

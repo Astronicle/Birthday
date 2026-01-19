@@ -15,6 +15,7 @@ const SequentialBirthday = () => {
   const [cakeRunActive, setCakeRunActive] = useState(false);
   const [showNewBg, setShowNewBg] = useState(false);
   const [showSharkFin, setShowSharkFin] = useState(false);
+  const [showBirthdayMessage, setShowBirthdayMessage] = useState(true);
   const audioRef = useRef(null);
   const nightShadeAudioRef = useRef(null);
 
@@ -52,6 +53,9 @@ const SequentialBirthday = () => {
   };
 
   const handleSharkClick = () => {
+    setTimeout(() => {
+      setShowBirthdayMessage(false);
+    }, 4000);
     setIsDecorated(false);
     setBalloonsActive(false);
     setCakeRunActive(false);
@@ -146,15 +150,17 @@ const SequentialBirthday = () => {
         />
 
         <AnimatePresence mode="wait">
-          {showButton ? (
+          {showButton && (
             <BirthdayStep
+              key="step-button"
               step={step}
               steps={steps}
               handleClick={handleClick}
               buttonClasses={buttonClasses}
             />
-          ) : (
-            step >= steps.length && <BirthdayMessage />
+          )}
+          {!showButton && showBirthdayMessage && (
+            <BirthdayMessage key="birthday-message" />
           )}
         </AnimatePresence>
       </motion.div>
