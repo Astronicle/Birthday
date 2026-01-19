@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import finalBg from '../assets/final_bg.mp4';
 import RotatingText from './react-bits/RotatingText';
+import DotGrid from './react-bits/DotGrid';
 
 const MainLanding = () => {
   const [showRotatingText, setShowRotatingText] = useState(false);
@@ -29,12 +30,39 @@ const MainLanding = () => {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          zIndex: -1, // Behind other content
+          zIndex: -2, // Behind other content
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.0 }}
       />
+      {showRotatingText && (
+        <motion.div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            zIndex: -1,
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 10.0 }}
+        >
+          <DotGrid
+            dotSize={4}
+            gap={10}
+            baseColor="#271E37"
+            activeColor="#08F0FF"
+            proximity={120}
+            shockRadius={250}
+            shockStrength={5}
+            resistance={750}
+            returnDuration={1.5}
+          />
+        </motion.div>
+      )}
       {showRotatingText && (
         <motion.div 
           style={{ position: 'absolute', top: '20px', left: '20px', display: 'flex', alignItems: 'center' }}
