@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Lottie from 'lottie-react';
-import cakeAnimation from '../assets/animations/CAKERUN.json';
+import cakeAnimation from '../../assets/animations/CAKERUN.json';
 import './CakeRun.css';
 
 const CakeInstance = ({ cake, onAnimationEnd }) => {

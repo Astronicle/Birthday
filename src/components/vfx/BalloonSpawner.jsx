@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Lottie from 'lottie-react';
-import balloonAnimation from '../assets/animations/balloon.json';
+import balloonAnimation from '../../assets/animations/balloon.json';
 
 const Balloon = ({ position, onComplete }) => {
   return (

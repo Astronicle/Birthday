@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import starImg from '../assets/decor/star.png';
+import starImg from '../../assets/decor/star.png';
 
 const starColors = [
   '#FFFFFF',

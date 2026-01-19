@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Lottie from 'lottie-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import SharkOriginal from '../assets/Shark_original.json';
+import SharkOriginal from '../../assets/Shark_original.json';
 
 const SurfaceShark = ({ onSharkClick }) => {
   const [position, setPosition] = useState({ x: 50, y: 50 });

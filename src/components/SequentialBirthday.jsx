@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import music from '../assets/Paradise-Paradise.mp3';
-import newMusic from '../assets/NightShade.m4a';
-import StarField from './StarField';
-import BalloonSpawner from './BalloonSpawner';
-import CakeRun from './CakeRun';
 import MainLanding from './MainLanding';
-import SurfaceShark from './SurfaceShark';
+import SurfaceShark from './vfx/SurfaceShark';
+import BirthdayStep from './birthday/BirthdayStep';
+import BirthdayMessage from './birthday/BirthdayMessage';
+import Decorations from './birthday/Decorations';
+import MusicPlayer from './birthday/MusicPlayer';
 
 const SequentialBirthday = () => {
   const [step, setStep] = useState(0);
@@ -125,19 +124,6 @@ const SequentialBirthday = () => {
     }
   }, [showButton]);
 
-
-  const buttonVariants = {
-    initial: { opacity: 0, scale: 0.5 },
-    animate: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-    exit: { opacity: 0, scale: 1.5, transition: { duration: 0.3 } },
-    hover: { scale: 1.1 }
-  };
-
-  const messageVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } }
-  };
-
   const getBgClass = () => {
     if (showNewBg) {
       return 'bg-transparent';
@@ -145,67 +131,30 @@ const SequentialBirthday = () => {
     return lightsOff ? 'bg-[#23272F] text-white' : 'bg-white text-[#23272F]';
   }
 
-  const motionDivExit = { opacity: 0, transition: { duration: 1 } };
-
   return (
     <>
       <motion.div
         key="birthday-content"
         className={`flex justify-center items-center h-screen text-center flex-col transition-colors duration-1000 relative overflow-hidden ${getBgClass()}`}
       >
-        <audio ref={audioRef} src={music} loop />
-        <audio ref={nightShadeAudioRef} src={newMusic} loop />
-
-        <AnimatePresence>
-            {isDecorated && (
-                <motion.div exit={motionDivExit}>
-                    <StarField isDecorated={isDecorated} />
-                </motion.div>
-            )}
-        </AnimatePresence>
-
-        <AnimatePresence>
-            {balloonsActive && (
-                <motion.div exit={motionDivExit}>
-                    <BalloonSpawner active={balloonsActive} />
-                </motion.div>
-            )}
-        </AnimatePresence>
-
-        <AnimatePresence>
-            {cakeRunActive && (
-                <motion.div exit={motionDivExit}>
-                    <CakeRun />
-                </motion.div>
-            )}
-        </AnimatePresence>
+        <MusicPlayer audioRef={audioRef} nightShadeAudioRef={nightShadeAudioRef} />
+        
+        <Decorations 
+          isDecorated={isDecorated}
+          balloonsActive={balloonsActive}
+          cakeRunActive={cakeRunActive}
+        />
 
         <AnimatePresence mode="wait">
           {showButton ? (
-            <motion.button
-              key={step}
-              onClick={handleClick}
-              className={`p-3 m-3 w-40 rounded-2xl text-center relative z-10 border-2 ${buttonClasses(step)}`}
-              variants={buttonVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              whileHover="hover"
-            >
-              {steps[step].text}
-            </motion.button>
+            <BirthdayStep
+              step={step}
+              steps={steps}
+              handleClick={handleClick}
+              buttonClasses={buttonClasses}
+            />
           ) : (
-            step >= steps.length && (
-              <motion.div
-                className="relative z-10"
-                variants={messageVariants}
-                initial="initial"
-                animate="animate"
-              >
-                <h2 className="text-5xl font-bold mb-4">Happy Birthday!</h2>
-                <p className="text-2xl">Hope you have a great day!</p>
-              </motion.div>
-            )
+            step >= steps.length && <BirthdayMessage />
           )}
         </AnimatePresence>
       </motion.div>
