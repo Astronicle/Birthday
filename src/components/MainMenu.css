@@ -1,0 +1,45 @@
+.main-menu-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  position: absolute;
+  top: 40px;
+  transform: translate(-50%, -50%);
+  width: 400px; /* Adjust width as needed */
+  cursor: none;
+}
+
+.menu-item-wrapper {
+  display: flex;
+}
+
+.menu-item-last {
+  grid-column: span 2;
+}
+
+.menu-item {
+  background-color: #1a1a1a;
+  color: #fff;
+  width: 400px;  /* Increased size */
+  height: 90px; /* Increased size */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: none;
+  transition: all 0.3s ease;
+  border: 1px solid #333;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  flex: 1; /* Allow menu item to grow and fill wrapper */
+}
+
+.menu-item:hover {
+  background-color: #08F0FF;
+  color: #1a1a1a;
+  box-shadow: 0 0 20px rgba(8, 240, 255, 0.8);
+  border-color: #08F0FF;
+}
+
+.menu-item:active {
+  transform: scale(0.95);
+}
