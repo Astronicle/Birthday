@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import finalBg from '../assets/final_bg.mp4';
-import RotatingText from './react-bits/RotatingText';
-import DotGrid from './react-bits/DotGrid';
-import TargetCursor from './react-bits/TargetCursor';
-import MainMenu from './MainMenu';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import finalBg from "../assets/final_bg.mp4";
+import RotatingText from "./react-bits/RotatingText";
+import DotGrid from "./react-bits/DotGrid";
+import TargetCursor from "./react-bits/TargetCursor";
+import MainMenu from "./MainMenu";
+import TextPressure from "./react-bits/TextPressure"; // Import TextPressure
 
 const MainLanding = () => {
   const [showRotatingText, setShowRotatingText] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [useTargetCursor, setUseTargetCursor] = useState(false);
+  const [showPfpFest, setShowPfpFest] = useState(false); // New state for PFP Fest
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,9 +30,17 @@ const MainLanding = () => {
     }
   }, [showRotatingText]);
 
+  const handlePfpFestClick = () => {
+    setShowPfpFest(true);
+  };
+
+  const handleBackButtonClick = () => {
+    setShowPfpFest(false);
+  };
+
   return (
     <div>
-      {useTargetCursor && <TargetCursor />}
+      {useTargetCursor && showMenu && !showPfpFest && <TargetCursor />}
       <motion.video
         src={finalBg}
         autoPlay
@@ -39,89 +49,155 @@ const MainLanding = () => {
         playsInline
         preload="auto"
         style={{
-          position: 'fixed',
+          position: "fixed",
           top: 0,
           left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
           zIndex: -2, // Behind other content
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.0 }}
       />
-      {showRotatingText && (
+
+      {showPfpFest ? (
         <motion.div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            zIndex: -1,
-          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 10.0 }}
-        >
-          <DotGrid
-            dotSize={4}
-            gap={10}
-            baseColor="#271E37"
-            activeColor="#08F0FF"
-            proximity={120}
-            shockRadius={250}
-            shockStrength={5}
-            resistance={750}
-            returnDuration={1.5}
-          />
-        </motion.div>
-      )}
-      {showRotatingText && (
-        <motion.div 
-          style={{ position: 'absolute', top: '20px', left: '20px', display: 'flex', alignItems: 'center' }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.0 }}
-        >
-          <motion.span 
-            className="text-white text-[clamp(1.5rem,6vw,3rem)] font-bold select-none mr-2"
-            initial={{ opacity: 0, x: -60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.0, delay: 0.2 }}
-          >
-            Wanna know 
-          </motion.span>
-          <RotatingText
-            texts={['how many messages you sent?', 'what pfps you used?', 'what games you beat?', 'how many gifs you shared?']}
-            mainClassName="px-2 sm:px-2 md:px-3 bg-[#1a1a1a] text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg border border-white text-[clamp(1.5rem,6vw,3rem)] font-bold select-none"
-            staggerFrom={'last'}
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '-120%' }}
-            staggerDuration={0.020}
-            splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-            transition={{ type: 'spring', damping: 30, stiffness: 400 }}
-            rotationInterval={1800}
-          />
-        </motion.div>
-      )}
-      {showMenu && (
-        <motion.div
-          initial={{ opacity: 0, perspective: '1000px', rotateY: -90 }}
-          animate={{ opacity: 1, perspective: '1000px', rotateY: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
           style={{
-            position: 'absolute',
-            top: '50%',
-            left: '35%', // Moved to 35% from the left
-            transform: 'translate(0%, -50%)', // Adjusted transform for new left position
-            transformStyle: 'preserve-3d',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1,
+            backgroundColor: "rgba(0,0,0,0.5)", // Optional: darken background slightly
           }}
         >
-          <MainMenu />
+          <button
+            onClick={handleBackButtonClick}
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "20px",
+              padding: "10px 20px",
+              backgroundColor: "#08F0FF",
+              color: "black",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              zIndex: 10,
+              fontWeight: "bold",
+            }}
+          >
+            Back to Menu
+          </button>
+          <TextPressure
+            text="pfp fest"
+            flex
+            alpha={false}
+            stroke={false}
+            width
+            weight
+            italic
+            textColor="#ffffff"
+            strokeColor="#5227FF"
+            minFontSize={10}
+          />
         </motion.div>
+      ) : (
+        <>
+          {showRotatingText && (
+            <motion.div
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                zIndex: -1,
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 10.0 }}
+            >
+              <DotGrid
+                dotSize={4}
+                gap={10}
+                baseColor="#271E37"
+                activeColor="#08F0FF"
+                proximity={120}
+                shockRadius={250}
+                shockStrength={5}
+                resistance={750}
+                returnDuration={1.5}
+              />
+            </motion.div>
+          )}
+          {showRotatingText && (
+            <motion.div
+              style={{
+                position: "absolute",
+                top: "20px",
+                left: "20px",
+                display: "flex",
+                alignItems: "center",
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.0 }}
+            >
+              <motion.span
+                className="text-white text-[clamp(1.5rem,6vw,3rem)] font-bold select-none mr-2"
+                initial={{ opacity: 0, x: -60 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.0, delay: 0.2 }}
+              >
+                Wanna know
+              </motion.span>
+              <RotatingText
+                texts={[
+                  "how many messages you sent?",
+                  "what pfps you used?",
+                  "what games you beat?",
+                  "how many gifs you shared?",
+                ]}
+                mainClassName="px-2 sm:px-2 md:px-3 bg-[#1a1a1a] text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg border border-white text-[clamp(1.5rem,6vw,3rem)] font-bold select-none"
+                staggerFrom={"last"}
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "-120%" }}
+                staggerDuration={0.02}
+                splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+                transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                rotationInterval={1800}
+              />
+            </motion.div>
+          )}
+          {showMenu && (
+            <motion.div
+              initial={{ opacity: 0, perspective: "1000px", rotateY: -90 }}
+              animate={{ opacity: 1, perspective: "1000px", rotateY: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "35%", // Moved to 35% from the left
+                transform: "translate(0%, -50%)", // Adjusted transform for new left position
+                transformStyle: "preserve-3d",
+              }}
+            >
+              <MainMenu onPfpFestClick={handlePfpFestClick} />
+            </motion.div>
+          )}
+        </>
       )}
     </div>
   );
