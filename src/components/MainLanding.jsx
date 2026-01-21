@@ -124,7 +124,7 @@ const MainLanding = () => {
               transition={{ duration: 10.0 }}
             >
               <DotGrid
-                dotSize={4}
+                dotSize={2}
                 gap={10}
                 baseColor="#271E37"
                 activeColor="#08F0FF"
