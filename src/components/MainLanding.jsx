@@ -5,13 +5,13 @@ import RotatingText from "./react-bits/RotatingText";
 import DotGrid from "./react-bits/DotGrid";
 import TargetCursor from "./react-bits/TargetCursor";
 import MainMenu from "./MainMenu";
-import TextPressure from "./react-bits/TextPressure"; // Import TextPressure
+import PfpFest from "./menuButtons/PfpFest";
 
 const MainLanding = () => {
   const [showRotatingText, setShowRotatingText] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [useTargetCursor, setUseTargetCursor] = useState(false);
-  const [showPfpFest, setShowPfpFest] = useState(false); // New state for PFP Fest
+  const [showPfpFest, setShowPfpFest] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -55,7 +55,7 @@ const MainLanding = () => {
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          zIndex: -2, // Behind other content
+          zIndex: -2,
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -63,55 +63,7 @@ const MainLanding = () => {
       />
 
       {showPfpFest ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 1,
-            backgroundColor: "rgba(0,0,0,0.5)", // Optional: darken background slightly
-          }}
-        >
-          <button
-            onClick={handleBackButtonClick}
-            style={{
-              position: "absolute",
-              top: "20px",
-              right: "20px",
-              padding: "10px 20px",
-              backgroundColor: "#08F0FF",
-              color: "black",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-              zIndex: 10,
-              fontWeight: "bold",
-            }}
-          >
-            Back to Menu
-          </button>
-          <TextPressure
-            text="pfp fest"
-            flex
-            alpha={false}
-            stroke={false}
-            width
-            weight
-            italic
-            textColor="#ffffff"
-            strokeColor="#5227FF"
-            minFontSize={10}
-          />
-        </motion.div>
+        <PfpFest onBackButtonClick={handleBackButtonClick} />
       ) : (
         <>
           {showRotatingText && (
@@ -189,8 +141,8 @@ const MainLanding = () => {
               style={{
                 position: "absolute",
                 top: "50%",
-                left: "35%", // Moved to 35% from the left
-                transform: "translate(0%, -50%)", // Adjusted transform for new left position
+                left: "35%",
+                transform: "translate(0%, -50%)",
                 transformStyle: "preserve-3d",
               }}
             >
