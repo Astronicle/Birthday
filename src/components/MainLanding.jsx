@@ -7,6 +7,7 @@ import TargetCursor from "./react-bits/TargetCursor";
 import MainMenu from "./MainMenu";
 import GamerMoment from "./menuButtons/GamerMoment";
 import PfpFest from "./menuButtons/PfpFest";
+import MessageStats from "./menuButtons/MessageStats";
 
 const MainLanding = () => {
   const [showRotatingText, setShowRotatingText] = useState(false);
@@ -34,7 +35,7 @@ const MainLanding = () => {
   const handleMenuClick = (menuItem) => {
     const componentMap = {
       "pfp fest": "PfpFest",
-      "message stats": "ComingSoon",
+      "message stats": "MessageStats",
       "gamer moment": "GamerMoment",
     };
     const componentName = componentMap[menuItem.toLowerCase()];
@@ -55,6 +56,8 @@ const MainLanding = () => {
         return <PfpFest onBackButtonClick={handleBackButtonClick} />;
       case "GamerMoment":
         return <GamerMoment onBackButtonClick={handleBackButtonClick} />;
+      case "MessageStats":
+        return <MessageStats onBackButtonClick={handleBackButtonClick} />;
       case "ComingSoon":
         return (
           <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center", color: 'white', backgroundColor: 'rgba(0,0,0,0.7)', zIndex: 9999, flexDirection: 'column', fontSize: '2rem' }}>
