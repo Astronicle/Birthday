@@ -5,13 +5,14 @@ import RotatingText from "./react-bits/RotatingText";
 import DotGrid from "./react-bits/DotGrid";
 import TargetCursor from "./react-bits/TargetCursor";
 import MainMenu from "./MainMenu";
+import GamerMoment from "./menuButtons/GamerMoment";
 import PfpFest from "./menuButtons/PfpFest";
 
 const MainLanding = () => {
   const [showRotatingText, setShowRotatingText] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [useTargetCursor, setUseTargetCursor] = useState(false);
-  const [showPfpFest, setShowPfpFest] = useState(false);
+  const [activeComponent, setActiveComponent] = useState(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -30,17 +31,59 @@ const MainLanding = () => {
     }
   }, [showRotatingText]);
 
-  const handlePfpFestClick = () => {
-    setShowPfpFest(true);
+  const handleMenuClick = (menuItem) => {
+    const componentMap = {
+      "pfp fest": "PfpFest",
+      "message stats": "ComingSoon",
+      "gamer moment": "GamerMoment",
+    };
+    const componentName = componentMap[menuItem.toLowerCase()];
+    if (componentName) {
+      setActiveComponent(componentName);
+    } else {
+      setActiveComponent("ComingSoon");
+    }
   };
 
   const handleBackButtonClick = () => {
-    setShowPfpFest(false);
+    setActiveComponent(null);
+  };
+
+  const renderActiveComponent = () => {
+    switch (activeComponent) {
+      case "PfpFest":
+        return <PfpFest onBackButtonClick={handleBackButtonClick} />;
+      case "GamerMoment":
+        return <GamerMoment onBackButtonClick={handleBackButtonClick} />;
+      case "ComingSoon":
+        return (
+          <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center", color: 'white', backgroundColor: 'rgba(0,0,0,0.7)', zIndex: 9999, flexDirection: 'column', fontSize: '2rem' }}>
+            <p>Coming Soon!</p>
+            <button
+              onClick={handleBackButtonClick}
+              style={{
+                marginTop: '20px',
+                padding: "10px 20px",
+                backgroundColor: "#08F0FF",
+                color: "black",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                fontWeight: "bold",
+              }}
+            >
+              Back to Menu
+            </button>
+          </div>
+        );
+      default:
+        return null;
+    }
   };
 
   return (
     <div>
-      {useTargetCursor && showMenu && !showPfpFest && <TargetCursor />}
+      {useTargetCursor && showMenu && !activeComponent && <TargetCursor />}
       <motion.video
         src={finalBg}
         autoPlay
@@ -62,8 +105,8 @@ const MainLanding = () => {
         transition={{ duration: 1.0 }}
       />
 
-      {showPfpFest ? (
-        <PfpFest onBackButtonClick={handleBackButtonClick} />
+      {activeComponent ? (
+        renderActiveComponent()
       ) : (
         <>
           {showRotatingText && (
@@ -146,7 +189,7 @@ const MainLanding = () => {
                 transformStyle: "preserve-3d",
               }}
             >
-              <MainMenu onPfpFestClick={handlePfpFestClick} />
+              <MainMenu onMenuItemClick={handleMenuClick} />
             </motion.div>
           )}
         </>
