@@ -55,7 +55,6 @@ const MainLanding = () => {
   };
 
   const handleBackButtonClick = () => {
-    console.log('Back button clicked!');
     setActiveComponent(null);
   };
 
@@ -193,6 +192,8 @@ const MainLanding = () => {
                 splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
                 transition={{ type: "spring", damping: 30, stiffness: 400 }}
                 rotationInterval={1800}
+                style={{ 
+                boxShadow: "0 0 15px 5px rgba(8, 240, 255, 0.7)", }}
               />
             </motion.div>
           )}

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import TextPressure from "../react-bits/TextPressure";
 import ImageTrail from "../react-bits/ImageTrail";
+import './MessageStats.css';
 
 // Import images from assets
 import img1 from "../../assets/pfps/1.png";
@@ -59,21 +60,9 @@ const PfpFest = ({ onBackButtonClick }) => {
       >
         <button
           onClick={onBackButtonClick}
-          style={{
-            position: "absolute",
-            top: "20px",
-            right: "20px",
-            padding: "10px 20px",
-            backgroundColor: "#08F0FF",
-            color: "black",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-            zIndex: 10,
-            fontWeight: "bold",
-          }}
+          className="back-button cursor-target"
         >
-          Back to Menu
+          M to Menu
         </button>
         <TextPressure
           text="pfp fest"

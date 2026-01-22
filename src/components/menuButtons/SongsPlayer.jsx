@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FaPlay, FaPause, FaStepBackward, FaStepForward } from 'react-icons/fa';
+import { FaPlay, FaPause, FaStepBackward, FaStepForward, FaMusic } from 'react-icons/fa';
 import './SongsPlayer.css';
 import song1 from '../../assets/music/daegho-nothing-on-u.mp3';
 import song2 from '../../assets/music/parallel-dimension.mp3';
@@ -91,6 +91,9 @@ const SongsPlayer = ({ onBackButtonClick }) => {
         &larr; Back
       </button>
       <div className="songs-player-content">
+        <div className="album-art-placeholder">
+          <FaMusic />
+        </div>
         <h3>Now Playing: {songs[currentSongIndex].name}</h3>
         <audio
           ref={audioRef}

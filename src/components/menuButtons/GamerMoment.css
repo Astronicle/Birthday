@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2rem; /* Added spacing between sections */
 }
 
 .back-button {
@@ -20,15 +21,27 @@
   border-radius: 5px;
   transition: all 0.3s ease;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  animation: neon-border-pulse 2s infinite alternate; /* Added neon pulse animation */
 }
 
 .back-button:hover {
   background-color: #08F0FF;
   color: #1a1a1a;
-  box-shadow: 0 0 20px rgba(8, 240, 255, 0.8);
+  box-shadow: 0 0 20px rgba(8, 240, 255, 0.8), 0 0 40px rgba(8, 240, 255, 0.6); /* More pronounced shadow */
   border-color: #08F0FF;
+  transform: scale(1.05); /* Slight scale on hover */
 }
 
+@keyframes neon-border-pulse {
+  from {
+    border-color: #333;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  to {
+    border-color: #08F0FF;
+    box-shadow: 0 0 15px rgba(8, 240, 255, 0.8);
+  }
+}
 
 .gamer-moment-title {
   font-family: 'Press Start 2P', cursive;
@@ -36,30 +49,62 @@
   text-align: center;
   margin-bottom: 2rem;
   letter-spacing: 0.5em;
+  color: #7df9ff; /* Emphasize title with neon color */
+  text-shadow: 0 0 10px rgba(125, 249, 255, 0.7); /* Add text shadow */
 }
 
 .game-category {
   margin-bottom: 3rem;
-  width: 100%;
+  width: 90%; /* Increased width for better presentation */
+  background-color: rgba(26, 26, 26, 0.7); /* Slightly transparent dark background */
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  transition: all 0.3s ease;
+}
+
+.game-category:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 0 30px rgba(8, 240, 255, 0.5); /* Neon shadow on hover */
 }
 
 .game-category h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #7df9ff;
-  padding-bottom: 0.5rem;
+  font-size: 2.5rem; /* Increased font size */
+  margin-bottom: 1.5rem; /* Increased margin */
+  border-bottom: 3px solid #7df9ff; /* Thicker border */
+  padding-bottom: 0.8rem; /* Increased padding */
   text-transform: uppercase;
+  color: #08F0FF; /* Neon color for titles */
+  text-shadow: 0 0 8px rgba(8, 240, 255, 0.7); /* Neon text shadow */
+  animation: pulse 2s infinite alternate; /* Added pulse animation */
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.02);
+  }
 }
 
 .game-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 1.5rem; /* Spacing between game cards */
+  transition: all 0.3s ease;
 }
 
 .to-do-next {
   text-align: center;
   margin-top: 3rem;
+  padding: 2rem;
+  background-color: rgba(26, 26, 26, 0.8);
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+  width: 90%;
+  transition: all 0.3s ease;
 }
 
 .to-do-next-button {
@@ -67,28 +112,137 @@
   color: #fff;
   border: 1px solid #333;
   padding: 1rem 2rem;
-  font-size: 1.5rem;
+  font-size: 1.8rem; /* Increased font size */
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease; /* Slower transition for more impact */
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  animation: neon-button-pulse 3s infinite ease-in-out; /* Added distinct pulse */
 }
 
 .to-do-next-button:hover {
   background-color: #08F0FF;
   color: #1a1a1a;
-  box-shadow: 0 0 20px rgba(8, 240, 255, 0.8);
+  box-shadow: 0 0 25px rgba(8, 240, 255, 0.9), 0 0 50px rgba(8, 240, 255, 0.7); /* Stronger neon glow */
   border-color: #08F0FF;
+  transform: scale(1.08); /* More pronounced scale */
+}
+
+@keyframes neon-button-pulse {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(8, 240, 255, 0.7), 0 0 30px rgba(8, 240, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
 }
 
 .next-game-display {
-  margin-top: 2rem;
+  margin-top: 2.5rem; /* Increased margin */
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 2px solid #7df9ff; /* Neon border */
+  border-radius: 10px;
+  padding: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.5); /* Darker background for contrast */
+  box-shadow: 0 0 15px rgba(125, 249, 255, 0.6); /* Neon shadow */
 }
 
 .next-game-display h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  font-size: 1.8rem; /* Increased font size */
+  margin-bottom: 1.2rem; /* Increased margin */
+  color: #7df9ff;
+  text-shadow: 0 0 5px rgba(125, 249, 255, 0.7);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+  .gamer-moment-title {
+    font-size: 3rem;
+  }
+  .game-category h2 {
+    font-size: 2rem;
+  }
+  .to-do-next-button {
+    font-size: 1.5rem;
+    padding: 0.8rem 1.5rem;
+  }
+  .next-game-display h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .gamer-moment {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+  .back-button {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  .gamer-moment-title {
+    font-size: 2.5rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 1.5rem;
+  }
+  .game-category {
+    width: 95%;
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+  .game-category h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  .game-list {
+    gap: 1rem;
+  }
+  .to-do-next {
+    padding: 1.5rem;
+    margin-top: 2rem;
+    width: 95%;
+  }
+  .to-do-next-button {
+    font-size: 1.2rem;
+    padding: 0.7rem 1.2rem;
+  }
+  .next-game-display {
+    margin-top: 1.5rem;
+    padding: 1rem;
+  }
+  .next-game-display h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gamer-moment-title {
+    font-size: 1.8rem;
+    letter-spacing: 0.1em;
+  }
+  .game-category h2 {
+    font-size: 1.5rem;
+  }
+  .back-button {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+  .to-do-next-button {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+  .next-game-display h3 {
+    font-size: 1rem;
+  }
 }

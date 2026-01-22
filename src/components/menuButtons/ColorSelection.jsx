@@ -16,19 +16,25 @@ const ColorSelection = ({ onBackButtonClick }) => {
   return (
     <div className="color-selection-container">
       <div className="color-selection-content">
-        <div className="color-selection-item">
-          <ShapeBlur variation={1} {...shapeBlurProps} color="#9B080A" />
-          <p>blood red</p>
+        <div className="color-option-wrapper cursor-target">
+          <div className="color-selection-item">
+            <ShapeBlur variation={1} {...shapeBlurProps} color="#9B080A" />
+            <p>blood red</p>
+          </div>
         </div>
 
-        <div className="color-selection-item">
-          <ShapeBlur variation={1} {...shapeBlurProps} color="#8FFFF6" />
-          <p>cerydra flame blue</p>
+        <div className="color-option-wrapper cursor-target">
+          <div className="color-selection-item">
+            <ShapeBlur variation={1} {...shapeBlurProps} color="#8FFFF6" />
+            <p>cerydra flame blue</p>
+          </div>
         </div>
 
-        <div className="color-selection-item">
-          <ShapeBlur variation={1} {...shapeBlurProps} color="#453481" />
-          <p>raiden purple</p>
+        <div className="color-option-wrapper cursor-target">
+          <div className="color-selection-item">
+            <ShapeBlur variation={1} {...shapeBlurProps} color="#453481" />
+            <p>raiden purple</p>
+          </div>
         </div>
       </div>
 
