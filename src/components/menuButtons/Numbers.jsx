@@ -4,10 +4,10 @@ import './Numbers.css';
 
 const Numbers = ({ onBackButtonClick }) => {
   return (
-    <div className={styles.overlay}>
+    <div className="overlay">
       <button
         onClick={onBackButtonClick}
-        className={`${styles.backButton} cursor-target`}
+        className={"backButton cursor-target"}
       >
         &larr; Back
       </button>
@@ -16,9 +16,9 @@ const Numbers = ({ onBackButtonClick }) => {
         enableWaves
         asciiFontSize={8}
         style={{ color: 'inherit', fontSize: 'inherit' }}
-        className={styles.asciiText}
+        className="asciiText"
       />
-      <div className={styles.message}>
+      <div className="message">
         That's it.
       </div>
     </div>
