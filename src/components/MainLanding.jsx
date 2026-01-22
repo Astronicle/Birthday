@@ -11,6 +11,7 @@ import MessageStats from "./menuButtons/MessageStats";
 import Numbers from "./menuButtons/Numbers";
 import ColorSelection from "./menuButtons/ColorSelection";
 import OtherRandomStuff from "./menuButtons/OtherRandomStuff";
+import SongsPlayer from "./menuButtons/SongsPlayer";
 
 const MainLanding = () => {
   const [showRotatingText, setShowRotatingText] = useState(false);
@@ -42,6 +43,7 @@ const MainLanding = () => {
       "gamer moment": "GamerMoment",
       "numbers.": "Numbers",
       "colors...": "Colors",
+      "songs????": "SongsPlayer",
       "other random stuff which i couldn't properly classify do not judge i tell u": "OtherRandomStuff",
     };
     const componentName = componentMap[menuItem.toLowerCase()];
@@ -71,6 +73,8 @@ const MainLanding = () => {
         return <ColorSelection onBackButtonClick={handleBackButtonClick} />;
       case "OtherRandomStuff":
         return <OtherRandomStuff onBackButtonClick={handleBackButtonClick} />;
+      case "SongsPlayer":
+        return <SongsPlayer onBackButtonClick={handleBackButtonClick} />;
       case "ComingSoon":
         return (
           <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center", color: 'white', backgroundColor: 'rgba(0,0,0,0.7)', zIndex: 9999, flexDirection: 'column', fontSize: '2rem' }}>
