@@ -8,6 +8,7 @@ import MainMenu from "./MainMenu";
 import GamerMoment from "./menuButtons/GamerMoment";
 import PfpFest from "./menuButtons/PfpFest";
 import MessageStats from "./menuButtons/MessageStats";
+import Numbers from "./menuButtons/Numbers";
 
 const MainLanding = () => {
   const [showRotatingText, setShowRotatingText] = useState(false);
@@ -37,6 +38,7 @@ const MainLanding = () => {
       "pfp fest": "PfpFest",
       "message stats": "MessageStats",
       "gamer moment": "GamerMoment",
+      "numbers.": "Numbers",
     };
     const componentName = componentMap[menuItem.toLowerCase()];
     if (componentName) {
@@ -47,6 +49,7 @@ const MainLanding = () => {
   };
 
   const handleBackButtonClick = () => {
+    console.log('Back button clicked!');
     setActiveComponent(null);
   };
 
@@ -58,6 +61,8 @@ const MainLanding = () => {
         return <GamerMoment onBackButtonClick={handleBackButtonClick} />;
       case "MessageStats":
         return <MessageStats onBackButtonClick={handleBackButtonClick} />;
+      case "Numbers":
+        return <Numbers onBackButtonClick={handleBackButtonClick} />;
       case "ComingSoon":
         return (
           <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center", color: 'white', backgroundColor: 'rgba(0,0,0,0.7)', zIndex: 9999, flexDirection: 'column', fontSize: '2rem' }}>
