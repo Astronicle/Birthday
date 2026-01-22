@@ -3,7 +3,7 @@ import './MainMenu.css';
 
 const menuItems = [
   ["pfp fest", "gamer moment", "message stats", "songs????"],
-  ["anime stuff", "colors...", "numbers.", "random stuff"],
+  ["colors...", "numbers."],
   ["other random stuff which i couldn't properly classify do not judge i tell u"]
 ];
 
